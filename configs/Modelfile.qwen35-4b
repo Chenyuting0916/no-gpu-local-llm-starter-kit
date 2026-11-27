@@ -1,0 +1,20 @@
+# Ollama Modelfile example for a local Qwen3.5-4B Q4_K_M GGUF.
+#
+# In No GPU Lab video 007, Ollama 0.40.16 with no GPU defaulted to
+# num_ctx 4096. A 14,995-token prompt then returned HTTP 200 and only
+# 2,818-2,820 tokens were read (~81% dropped, no warning).
+# The matched run used context 16384, 7 threads, thinking off, and
+# then Ollama tied llama.cpp on time-to-first-token.
+#
+# Replace the FROM line with your local file or a pulled model tag.
+# I have not re-imported this exact file on an idle box after adding
+# these PARAMETER lines; the values themselves were the ones used in
+# the matched 007 run (via runtime options).
+
+FROM ./Qwen3.5-4B-Q4_K_M.gguf
+
+PARAMETER num_ctx 16384
+PARAMETER num_thread 7
+PARAMETER temperature 0
+# For Qwen3 / Qwen3.5, also disable thinking in the request or template.
+# A 6,144-token output cap was used on the coding-agent runs in video 007.

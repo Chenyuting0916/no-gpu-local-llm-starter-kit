@@ -1,0 +1,17 @@
+# Config notes
+#
+# opencode.json
+#   Cleaned from the video 007 test config. The original pointed at a
+#   logging proxy on 127.0.0.1:11701. This copy points at llama-server
+#   on 127.0.0.1:8080, which is the default in scripts/start_llama_server.sh.
+#   The important field is models.*.limit.context = 16384. OpenCode's
+#   first tool-heavy turn in that test was a 7,149-7,487 token block;
+#   with Ollama's default 4,096 context it failed loudly (HTTP 400, 7/7).
+#
+# Modelfile.qwen35-4b
+#   PARAMETER num_ctx 16384 is the fix for Ollama's silent 81% drop on a
+#   15k prompt (video 007). Put the file next to your GGUF, or change FROM.
+#
+# I did not ship an aider YAML. Video 007 used aider 0.86.2 in diff mode
+# against the local server; the settings that mattered were the server /
+# Ollama ones in the guide (context 16384, 7 threads, thinking off).
